@@ -1,0 +1,17 @@
+ps2exe -inputFile "script.ps1" -outputFile "script.exe" -noConsole
+
+Weekly Focus
+
+1) Ensure Streaming server runs with both Streaming servies decentralized (1936) and centralied (1935)
+2) animations for frontend winpricavcy
+3) Prep hackathon (n8n/ automation)
+4) fix reciever chip on Sensor PCB 
+5) create customized ransomware for attack simulation
+
+
+Reminders
+1) possible to buy 3d printer?
+2) 22nd of november there might be a robotics hackathon
+
+
+
