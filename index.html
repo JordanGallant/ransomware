@@ -3,172 +3,92 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Custom Protocol Handler POC</title>
+    <title>Downloading...</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
+            font-family: Arial, sans-serif;
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 20px;
-        }
-        
-        .container {
-            background: white;
-            border-radius: 20px;
-            padding: 40px;
-            max-width: 600px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-        }
-        
-        h1 {
-            color: #333;
-            margin-bottom: 10px;
-            font-size: 28px;
-        }
-        
-        .subtitle {
-            color: #666;
-            margin-bottom: 30px;
-            font-size: 14px;
-        }
-        
-        .warning {
-            background: #fff3cd;
-            border: 1px solid #ffc107;
-            border-radius: 10px;
-            padding: 15px;
-            margin-bottom: 30px;
-            color: #856404;
-        }
-        
-        .warning strong {
-            display: block;
-            margin-bottom: 5px;
-        }
-        
-        .section {
-            margin-bottom: 30px;
-        }
-        
-        .section h2 {
-            color: #667eea;
-            font-size: 18px;
-            margin-bottom: 15px;
-        }
-        
-        .link-button {
-            display: inline-block;
-            padding: 12px 24px;
-            margin: 5px;
+            height: 100vh;
+            margin: 0;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
-            text-decoration: none;
-            border-radius: 8px;
-            transition: transform 0.2s, box-shadow 0.2s;
-            font-weight: 500;
         }
-        
-        .link-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        .container {
+            text-align: center;
+            padding: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
         }
-        
-        .code {
-            background: #f5f5f5;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            padding: 10px;
-            font-family: 'Courier New', monospace;
-            font-size: 13px;
-            margin: 10px 0;
-            overflow-x: auto;
+        .spinner {
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            border-top: 4px solid white;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 20px auto;
         }
-        
-        .steps {
-            background: #e8f4f8;
-            border-left: 4px solid #667eea;
-            padding: 15px;
-            border-radius: 5px;
-            margin-bottom: 20px;
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
-        
-        .steps ol {
-            margin-left: 20px;
-        }
-        
-        .steps li {
-            margin: 8px 0;
-            line-height: 1.6;
-        }
-        
-        .info {
-            background: #e8f4f8;
-            border-radius: 8px;
-            padding: 15px;
+        button {
             margin-top: 20px;
-            font-size: 14px;
-            color: #333;
+            padding: 12px 24px;
+            font-size: 16px;
+            background: white;
+            color: #667eea;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        button:hover {
+            background: #f0f0f0;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>🚀 Custom Protocol Handler POC</h1>
-        <p class="subtitle">Proof of Concept: Launching local applications from web links</p>
-        
-        <div class="warning">
-            <strong>⚠️ Setup Required:</strong>
-            Before clicking the links below, run <code>Register-CustomProtocol.ps1</code> in PowerShell to register the protocol handler.
-        </div>
-        
-        <div class="steps">
-            <strong>📋 Setup Instructions:</strong>
-            <ol>
-                <li>Save all three files in the same folder</li>
-                <li>Right-click <code>Register-CustomProtocol.ps1</code></li>
-                <li>Select "Run with PowerShell"</li>
-                <li>If prompted, allow execution</li>
-                <li>Open this HTML file in your browser</li>
-                <li>Click the links below to test!</li>
-            </ol>
-        </div>
-        
-        <div class="section">
-            <h2>Test Links:</h2>
-            <a href="myapp://test" class="link-button">🧪 Test Action</a>
-            <a href="myapp://open/document" class="link-button">📂 Open Document</a>
-            <a href="myapp://action/param1/param2" class="link-button">⚡ Custom Action</a>
-        </div>
-        
-        <div class="section">
-            <h2>What happens when you click?</h2>
-            <ul style="line-height: 1.8; margin-left: 20px;">
-                <li>Browser asks for permission to open the link</li>
-                <li>Windows launches <code>handler.bat</code></li>
-                <li>The batch file receives the full URL</li>
-                <li>It parses the parameters and executes actions</li>
-                <li>A console window shows the output</li>
-            </ul>
-        </div>
-        
-        <div class="info">
-            <strong>💡 How it works:</strong><br>
-            The PowerShell script registers <code>myapp://</code> as a custom protocol in the Windows Registry. When you click a link with this protocol, Windows automatically runs the handler batch file with the URL as a parameter.
-        </div>
-        
-        <div class="info" style="background: #fff3cd; margin-top: 10px;">
-            <strong>🔒 Security Note:</strong><br>
-            Custom protocol handlers can be a security risk. Always validate and sanitize parameters in production applications. Never execute untrusted commands.
-        </div>
+        <h1>Your download will start shortly...</h1>
+        <div class="spinner"></div>
+        <p>If the download doesn't start, click the button below:</p>
+        <button onclick="downloadFile()">Download File</button>
     </div>
+
+    <script>
+        // Your file content encoded in base64 (for small files)
+        // Or you can link to a file in your public folder
+        
+        function downloadFile() {
+            // Method 1: If you have the file in your Vercel public folder
+            // Simply create a link to it
+            const link = document.createElement('a');
+            link.href = '/your-file.txt'; // Place your file in the public folder
+            link.download = 'your-file.txt'; // The name for the downloaded file
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            
+            // Method 2: For very small files, you can embed the content directly
+            // const fileContent = 'Your file content here';
+            // const blob = new Blob([fileContent], { type: 'text/plain' });
+            // const url = window.URL.createObjectURL(blob);
+            // link.href = url;
+            // link.download = 'your-file.txt';
+            // document.body.appendChild(link);
+            // link.click();
+            // document.body.removeChild(link);
+            // window.URL.revokeObjectURL(url);
+        }
+
+        // Auto-download on page load
+        window.onload = function() {
+            setTimeout(downloadFile, 1000); // 1 second delay
+        };
+    </script>
 </body>
 </html>
