@@ -1,14 +1,14 @@
-# Decryption Script for .fokjou files
-$FolderPath = "C:\Users\jgsleepy\OneDrive - 2Source4\Attachments"
+# Decryption Script for .quaro files
+$FolderPath = "C:\Users\jvdbosch\OneDrive - 2source4 B.V\2SOURCE4"
 $Password = "jgsleepwithme"
 
-Write-Host "`n=== Decrypting .fokjou files ===" -ForegroundColor Cyan
+Write-Host "`n=== Decrypting .quaro files ===" -ForegroundColor Cyan
 
-# Get all .fokjou files recursively
-$files = Get-ChildItem -Path $FolderPath -Filter "*.fokjou" -Recurse -File
+# Get all .quaro files recursively
+$files = Get-ChildItem -Path $FolderPath -Filter "*.quaro" -Recurse -File
 
 if ($files.Count -eq 0) {
-    Write-Host "No .fokjou files found!" -ForegroundColor Red
+    Write-Host "No .quaro files found!" -ForegroundColor Red
     exit
 }
 
